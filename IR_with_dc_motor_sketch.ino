@@ -25,14 +25,7 @@ unsigned long motorStartTime4, motorStartTime5, motorStartTime6 = 0;
 unsigned long motorStartTime7, motorStartTime8, motorStartTime9 = 0;
 bool powerButtonPressed = false;
 void startMotor();
-void startMotor2();
-void startMotor3();
-void startMotor4();
-void startMotor5();
-void startMotor6();
-void startMotor7();
-void startMotor8();
-void startMotor9();
+void startMotor1(int mode);
 void stopMotor();
 
 void setup() {
@@ -63,63 +56,63 @@ void loop() {
      switch (rawData) {
       case 0xF30CFF00: // One button pressed
         if (!motorRunning1) {
-          startMotor1();
+          startMotor1(10);
           motorRunning1 = true;
           motorStartTime1 = millis(); // Record the motor start time
         }
         break;
       case 0xE718FF00: // Two button pressed
         if (!motorRunning2) {
-          startMotor2();
+          startMotor1(20);
           motorRunning2 = true;
           motorStartTime2 = millis(); 
         }
         break;
       case 0xA15EFF00: // Three button pressed
         if (!motorRunning3) {
-          startMotor3();
+          startMotor1(30);
           motorRunning3 = true;
           motorStartTime3 = millis(); 
         }
         break;
       case 0xF708FF00:
         if (!motorRunning4) {
-          startMotor4();
+          startMotor1(40);
           motorRunning4 = true;
           motorStartTime4 = millis(); 
         }
         break;
       case 0xE31CFF00:
         if (!motorRunning5) {
-          startMotor5();
+          startMotor1(50);
           motorRunning5 = true;
           motorStartTime5 = millis(); 
         }
         break;
       case 0xA55AFF00:
         if (!motorRunning6) {
-          startMotor6();
+          startMotor1(60);
           motorRunning6 = true;
           motorStartTime6 = millis(); 
         }
         break;
       case 0xBD42FF00:
         if (!motorRunning7) {
-          startMotor7();
+          startMotor1(70);
           motorRunning7 = true;
           motorStartTime7 = millis(); 
         }
         break;
       case 0xAD52FF00:
         if (!motorRunning8) {
-          startMotor8();
+          startMotor1(80);
           motorRunning8 = true;
           motorStartTime8 = millis(); 
         }
         break;
       case 0xB54AFF00:
         if (!motorRunning9) {
-          startMotor9();
+          startMotor1(90);
           motorRunning9 = true;
           motorStartTime9 = millis(); 
         }
@@ -219,60 +212,14 @@ void startMotor() {   //define functions
   motorRunning = true;
  
 }
-void startMotor1() {   //define functions
+void startMotor1(int mode) {   //define functions
   digitalWrite(dir1, LOW);
   digitalWrite(dir2, HIGH);
   analogWrite(speedPin, mSpeed);
-  Serial.print("10 sec. ");
+  Serial.print( mode );
+  Serial.println(" sec.");
 }
-void startMotor2() {
-  digitalWrite(dir1, LOW);
-  digitalWrite(dir2, HIGH);
-  analogWrite(speedPin, mSpeed);
-  Serial.println("20 sec.");
-}
-void startMotor3() {
-  digitalWrite(dir1, LOW);
-  digitalWrite(dir2, HIGH);
-  analogWrite(speedPin, mSpeed);
-  Serial.println("30 sec.");
-}
-void startMotor4() {
-  digitalWrite(dir1, LOW);
-  digitalWrite(dir2, HIGH);
-  analogWrite(speedPin, mSpeed);
-  Serial.println("40 sec.");
-}
-void startMotor5() {
-  digitalWrite(dir1, LOW);
-  digitalWrite(dir2, HIGH);
-  analogWrite(speedPin, mSpeed);
-  Serial.println("50 sec.");
-}
-void startMotor6() {
-  digitalWrite(dir1, LOW);
-  digitalWrite(dir2, HIGH);
-  analogWrite(speedPin, mSpeed);
-  Serial.println("60 sec.");
-}
-void startMotor7() {
-  digitalWrite(dir1, LOW);
-  digitalWrite(dir2, HIGH);
-  analogWrite(speedPin, mSpeed);
-  Serial.println("70 sec.");
-}
-void startMotor8() {
-  digitalWrite(dir1, LOW);
-  digitalWrite(dir2, HIGH);
-  analogWrite(speedPin, mSpeed);
-  Serial.println("80 sec.");
-}
-void startMotor9() {
-  digitalWrite(dir1, LOW);
-  digitalWrite(dir2, HIGH);
-  analogWrite(speedPin, mSpeed);
-  Serial.println("90 sec.");
-}
+
 
 void stopMotor() {
   digitalWrite(dir1, HIGH); // Set both inputs to high to stop the motor
